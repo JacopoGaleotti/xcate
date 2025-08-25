@@ -5,37 +5,32 @@ export async function handler(event, context) {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
+
   try {
     const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
     if (!OPENAI_API_KEY) {
       return { statusCode: 500, body: JSON.stringify({ error: 'Missing OPENAI_API_KEY' }) };
     }
 
-    // macro-temi e autori (classici o "originale")
-    const THEMES = ['romantico','sociologico','filosofico','esistenziale'];
-    const AUTHORS = [
-      { name: 'Rainer Maria Rilke', style: 'tono contemplativo, immagini interiori, delicatezza' },
-      { name: 'Fernando Pessoa', style: 'eteronimia, malinconia lucida, intimità' },
-      { name: 'Virginia Woolf', style: 'flusso di coscienza, attenzione ai dettagli percettivi' },
-      { name: 'Albert Camus', style: 'assurdo, limpidezza etica, calore mediterraneo sobrio' },
-      { name: 'Jean-Paul Sartre', style: 'libertà, responsabilità, sguardo esistenziale' },
-      { name: 'Originale (Jacopo)', style: 'poetico, intimo, minimale, immagini stellari' }
-    ];
+    // Aggiungo timestamp casuale per maggiore variabilità
+    const timestamp = Date.now();
 
-    const theme = THEMES[Math.floor(Math.random()*THEMES.length)];
-    const authorPick = AUTHORS[Math.floor(Math.random()*AUTHORS.length)];
+    // Prompt chiaro: ChatGPT sceglie autore e citazione
+    const prompt = `Genera una citazione breve (1 o 2 frasi) in italiano.
+- Tema: romantico, sociologico, filosofico o esistenziale, scegli tu.
+- Autore: scegli un autore appropriato (classico o contemporaneo); non limitarti a una lista fissa.
+- Tono: poetico, sobrio, immagini notturne/fugaci consentite.
+- Evita contenuti sensibili o espliciti.
+- Non superare 35 parole.
+- Restituisci SOLO JSON valido con chiavi:
+  {"author":"string","quote":"string"}
+  Dove "author" deve essere l'autore scelto da te.
 
-    const prompt = `Genera una citazione breve (1 o 2 frasi) in italiano, ${theme}.
-- Riporta una citazione originale di un autore reale nello **spirito tematico** indicato
-- Tono: poetico ma sobrio, immagini notturne/fugaci consentite.
-- Evita contenuti sensibili o espliciti. Non superare 35 parole totali.
-
-Restituisci **solo** JSON con le chiavi: {"author":"string","quote":"string"}
-Dove "author" sia: autore reale, il suo nome; 
+Timestamp: ${timestamp}`;
 
     const body = {
       model: "gpt-4o-mini",
-      input: `Autore selezionato: ${authorPick.name}\nIndicazioni di stile: ${authorPick.style}\n\n${prompt}`,
+      input: prompt,
       response_format: {
         type: "json_schema",
         json_schema: {
@@ -43,7 +38,7 @@ Dove "author" sia: autore reale, il suo nome;
           schema: {
             type: "object",
             additionalProperties: false,
-            required: ["author","quote"],
+            required: ["author", "quote"],
             properties: {
               author: { type: "string" },
               quote: { type: "string", maxLength: 280 }
@@ -69,30 +64,32 @@ Dove "author" sia: autore reale, il suo nome;
     }
 
     const data = await resp.json();
-    // Responses API returns { output: [ { content: [ { type:'output_text', text:'{...}' } ] } ] ... }
+
+    // Estrazione testo JSON restituito
     let jsonText = "";
     try {
-      const first = data?.output?.[0]?.content?.[0]?.text ?? data?.output_text ?? "";
-      jsonText = first;
-    } catch(e) { /* noop */ }
+      jsonText = data?.output?.[0]?.content?.[0]?.text ?? data?.output_text ?? "";
+    } catch (e) { /* noop */ }
 
+    // Parsing robusto
     let parsed;
     try {
       parsed = JSON.parse(jsonText);
-    } catch(e) {
-      // fallback: if model returned plain text, attempt to coerce
-      parsed = { author: authorPick.name === 'Originale (Jacopo)' ? 'Jacopo' : authorPick.name, quote: String(jsonText).trim().replace(/^["“]|["”]$/g,'') };
+      if (!parsed.author || !parsed.quote) throw new Error("Incomplete JSON");
+    } catch (e) {
+      // fallback: se JSON non valido, prendi tutto come citazione e autore "Sconosciuto"
+      parsed = { author: "Sconosciuto", quote: String(jsonText).trim().replace(/^["“]|["”]$/g, '') };
     }
 
-    // sanitize minimal
-    const authorFinal = (authorPick.name === 'Originale (Jacopo)') ? 'Jacopo' : (parsed.author || authorPick.name);
-    const quoteFinal = (parsed.quote || "").toString().trim();
+    const authorFinal = parsed.author;
+    const quoteFinal = parsed.quote;
 
     return {
       statusCode: 200,
-      headers: { "Content-Type": "application/json", "Cache-Control":"no-store" },
-      body: JSON.stringify({ author: authorFinal, quote: quoteFinal, theme, ts: Date.now() })
+      headers: { "Content-Type": "application/json", "Cache-Control": "no-store" },
+      body: JSON.stringify({ author: authorFinal, quote: quoteFinal, ts: timestamp })
     };
+
   } catch (err) {
     console.error(err);
     return { statusCode: 500, body: JSON.stringify({ error: "Server error" }) };
