@@ -216,12 +216,26 @@ document.getElementById('custom-quote-btn').addEventListener('click', openCustom
 
 document.getElementById('text-quote-btn').addEventListener('click', () => {
   modal.style.display = 'flex';
+
+  // Salva il titolo originale
+  const originalTitle = document.getElementById('quoteTitle').innerText;
+
+  // Cambia il titolo solo per questo popup
+  document.getElementById('quoteTitle').innerText = "";
+
   const textQuote = {
-    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    quote: "Il senso e la bellezza risiedono nella crepa tra ciò che eri e ciò che non sai di poter essere. Allora non fuggire dal buio e non cercare la luce, sii trasparente. Non cercare una direzione, sii la tua direzione. Forse abbandonerai il percorso di qualcun altro, forse quello che sognavi da bambina. Ma va bene così. E quando sarai stanca, estraniati, guardati dall'alto e ammira ciò che sei (come in Enter The Void!). Diventa il sogno che ti sogna, le lacrime che rendono vivido il tuo essere, i sorrisi che illuminano il tuo volto. Sono sicuro che ne sei e sarai in grado. Emoziona ed emozionati. Sentiti speciale cate, lo sei.",
     author: "Jacopo"
   };
   setQuote(textQuote);
+
+  // Quando chiudi il popup, ripristina il titolo originale
+  closeBtn.addEventListener('click', function restoreTitle() {
+    document.getElementById('quoteTitle').innerText = originalTitle;
+    closeBtn.removeEventListener('click', restoreTitle);
+  });
 });
+
 
 
 
