@@ -174,8 +174,8 @@ async function openQuoteModal(){
   }catch(err){
     // fallback locale poetico (se API fallisce)
     const fallbacks = [
-  {quote:"La notte ascolta i pensieri più profondi.", author:"Jacopo"},
-  {quote:"Ogni stella è un pensiero che brilla.", author:"Jacopo"},
+  {quote:"La notte ascolta i pensieri più profondi.", author:"Sconosciuto"},
+  {quote:"Ogni stella è un pensiero che brilla.", author:"Sconosciuto"},
 ];
     setQuote(fallbacks[Math.floor(Math.random()*fallbacks.length)]);
     console.warn('Errore nel recupero citazione:', err);
