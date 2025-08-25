@@ -95,6 +95,26 @@ body{
   box-shadow: 0 0 15px rgba(160, 196, 255, 0.6);
 }
 
+#custom-quote-btn {
+  position: fixed;
+  bottom: 80px; /* per metterlo sopra al pulsante API */
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  color: #f0f8ff;
+  border: 1px solid #a0c4ff;
+  border-radius: 20px;
+  padding: 10px 25px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#custom-quote-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 15px rgba(160, 196, 255, 0.6);
+}
+
 /* Loader */
 .loader{
   width:22px; height:22px; border-radius:50%;
