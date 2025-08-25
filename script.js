@@ -185,3 +185,8 @@ window.addEventListener('keydown', (e)=>{
   if(e.key === 'Escape') modal.style.display = 'none';
 });
 
+document.getElementById('new-quote-btn').addEventListener('click', () => {
+    location.reload(); // ricarica la pagina e genera nuova citazione
+});
+
+
