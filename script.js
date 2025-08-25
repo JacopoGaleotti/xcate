@@ -187,6 +187,31 @@ document.getElementById('new-quote-btn').addEventListener('click', () => {
   openQuoteModal(); // rotella funzionante anche su click
 });
 
+// --- Citazioni personali da JSON ---
+async function openCustomQuote() {
+  modal.style.display = 'flex';
+
+  try {
+    const res = await fetch('./quotes.json');
+    if (!res.ok) throw new Error('Impossibile caricare quotes.json');
+    const data = await res.json();
+    const arr = data.quotes;
+    const randomIndex = Math.floor(Math.random() * arr.length);
+
+    const customQuote = {
+      quote: arr[randomIndex],
+      author: "Jacopo" // o lascia "Sconosciuto" se preferisci
+    };
+
+    setQuote(customQuote);
+  } catch (err) {
+    console.error('Errore citazioni personali:', err);
+    setQuote({quote:"Citazione personale non disponibile.", author:"Sconosciuto"});
+  }
+}
+
+document.getElementById('custom-quote-btn').addEventListener('click', openCustomQuote);
+
 
 
 
