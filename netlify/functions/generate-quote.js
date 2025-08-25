@@ -12,7 +12,7 @@ export async function handler(event, context) {
 
     const timestamp = Date.now();
 
-    const prompt = `Genera una citazione breve in italiano (1-2 frasi) su temi romantici, filosofici, sociologici o esistenziali. Scegli un autore appropriato (classico o contemporaneo, da Dostoevskij a Kafka, da Pirandello a Montale. Hai pura libertà nella scelta dell'autore). La citazione deve essere poetica e sobria.  
+    const prompt = `Genera una citazione breve in italiano (1-2 frasi) su temi romantici o filosofici o sociologici o esistenziali. Scegli un autore appropriato (classico o contemporaneo, da Dostoevskij a Kafka, da Pirandello a Montale. Hai pura libertà nella scelta dell'autore). La citazione deve essere poetica e sobria.  
 
 ⚠️ IMPORTANTE: restituisci **solo JSON valido** senza testo extra, senza spiegazioni, senza virgolette esterne. Il JSON deve avere **esattamente** queste chiavi:  
 {
