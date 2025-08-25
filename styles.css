@@ -174,18 +174,44 @@ body{
 }
 
 /* Responsive buttons layout */
+/* Responsive layout per mobile */
 @media (max-width: 480px) {
+  .modal__panel {
+    max-height: calc(100% - 100px); /* popup ridotto, lascia spazio ai pulsanti */
+    overflow-y: auto;               /* scroll se il testo è lungo */
+  }
+
   .button-group {
-    justify-content: center;       /* centrati */
-    gap: 16px;                      /* meno spazio tra i pulsanti */
-    bottom: 10px;                  /* più vicino al bordo basso */
+    flex-direction: row;            /* pulsanti su una riga */
+    justify-content: center;
+    gap: 14px;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .button-group button {
-    font-size: 0.8rem;             /* testo più piccolo */
-    padding: 8px 12px;             /* pulsanti più compatti */
-    border-radius: 12px;
+    width: 48px;                    /* pulsante rotondo */
+    height: 48px;
+    border-radius: 50%;             /* pallino */
+    font-size: 1.2rem;
+    padding: 0;
+    text-align: center;
+    line-height: 48px;
+  }
+
+  /* Specifica: cambiamo solo il testo interno col contenuto più corto */
+  #new-quote-btn::after { content: "✨"; }
+  #custom-quote-btn::after { content: "✍️"; }
+  #text-quote-btn::after { content: "❤️"; }
+
+  /* Nascondiamo il testo originale nei pulsanti solo su mobile */
+  #new-quote-btn,
+  #custom-quote-btn,
+  #text-quote-btn {
+    font-size: 0; /* nasconde il testo */
   }
 }
+
 
 
