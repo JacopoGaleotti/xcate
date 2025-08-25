@@ -116,42 +116,6 @@ body{
 }
 
 
-.modal__text-btn{
-  position:absolute;
-  top:8px;
-  left:10px; /* distanza dal bordo sinistro */
-  height:36px;
-  border-radius:12px;
-  border:1px solid #7f95db33;
-  background:#0e1533;
-  color:#dbe6ff;
-  font-size:14px;
-  line-height:34px;
-  padding:0 10px;
-  cursor:pointer;
-  transition:.2s;
-  box-shadow: 0 6px 18px rgba(0,0,0,.25);
-}
-.modal__text-btn:hover{
-  transform: translateY(-1px);
-  box-shadow: 0 10px 24px rgba(0,0,0,.35);
-}
-
-/* Stile speciale per popup "Testo" */
-.modal__panel.text-mode {
-  background: linear-gradient(180deg, #1a1f3b 0%, #202641 100%);
-  border:1px solid #5a6bbf33;
-}
-
-.modal__panel.text-mode .modal__title {
-  color: #ffd97d; /* colore diverso dal titolo citazioni */
-  text-shadow: 0 1px 0 rgba(0,0,0,.5);
-}
-
-.modal__panel.text-mode .modal__content {
-  border-left:3px solid #ffd97d44;
-  color: #fff2cc;
-}
 
 /* Loader */
 .loader{
