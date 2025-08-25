@@ -1,6 +1,4 @@
 // /.netlify/functions/generate-quote.js
-// Netlify Functions (Node) — chiama l'API OpenAI senza esporre la chiave al client.
-// Imposta in Netlify l'ambiente: OPENAI_API_KEY
 export async function handler(event, context) {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
@@ -27,10 +25,8 @@ Timestamp: ${timestamp}`;
 
     const body = {
       model: "gpt-4o-mini",
-      input: prompt,
-      text: {
-        format: "json"
-      }
+      input: prompt
+      // nessun 'response_format' o 'text.format'
     };
 
     const resp = await fetch("https://api.openai.com/v1/responses", {
@@ -50,7 +46,7 @@ Timestamp: ${timestamp}`;
 
     const data = await resp.json();
 
-    // Estrazione robusta del testo JSON
+    // Prendi il testo generato dal modello
     let parsed;
     try {
       const rawText = data.output_text || data?.output?.[0]?.content?.[0]?.text || "";
