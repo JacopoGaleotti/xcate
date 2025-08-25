@@ -75,73 +75,22 @@ body{
 .modal__close:hover{ transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0,0,0,.35) }
 .modal__close:focus{ outline:2px solid var(--ring); outline-offset:2px }
 
-#new-quote-btn {
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.1);
-  color: #f0f8ff;
-  border: 1px solid #a0c4ff;
-  border-radius: 20px;
-  padding: 10px 25px;
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: 0.3s;
-}
-#new-quote-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 15px rgba(160, 196, 255, 0.6);
-}
 
-#custom-quote-btn {
-  bottom: 80px; /* per metterlo sopra al pulsante API */
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.1);
-  color: #f0f8ff;
-  border: 1px solid #a0c4ff;
-  border-radius: 20px;
-  padding: 10px 25px;
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: 0.3s;
-}
-#custom-quote-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 15px rgba(160, 196, 255, 0.6);
-}
+/* --- RIMOSSI gli stili singoli dei pulsanti --- */
+/* Non servono più #new-quote-btn, #custom-quote-btn, #text-quote-btn con bottom/left ecc. */
 
-#text-quote-btn {
-  bottom: 130px; /* sotto gli altri due */
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.1);
-  color: #f0f8ff;
-  border: 1px solid #a0c4ff;
-  border-radius: 20px;
-  padding: 10px 25px;
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-#text-quote-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 15px rgba(160, 196, 255, 0.6);
-}
-
+/* Gruppo pulsanti - Desktop */
 .button-group {
   position: fixed;
   bottom: 40px;
   left: 50%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
-  gap: 12px; /* 👈 spazio uniforme tra i pulsanti */
+  gap: 12px;
 }
 
+/* Stile base pulsanti */
 .button-group button {
   background: rgba(255, 255, 255, 0.1);
   color: #f0f8ff;
@@ -159,58 +108,34 @@ body{
   box-shadow: 0 0 15px rgba(160, 196, 255, 0.6);
 }
 
-/* Loader */
-.loader{
-  width:22px; height:22px; border-radius:50%;
-  border:2px solid #a8b9ff33; border-top-color:#a8b9ff;
-  animation: spin 1s linear infinite; margin:6px 4px;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* Small screens */
-
-@media (max-width:480px){
-  .modal__content {font-size:1rem; line-height:1.5;}
-}
-
-/* Responsive buttons layout */
-/* Responsive layout per mobile */
+/* Mobile layout */
 @media (max-width: 480px) {
   .modal__panel {
-    max-height: calc(100% - 100px); /* popup ridotto, lascia spazio ai pulsanti */
-    overflow-y: auto;               /* scroll se il testo è lungo */
+    max-height: calc(100% - 100px); /* popup ridotto per non coprire i pulsanti */
+    overflow-y: auto;
   }
 
   .button-group {
-    flex-direction: row;            /* pulsanti su una riga */
+    flex-direction: row;       /* pulsanti in riga */
     justify-content: center;
     gap: 14px;
     bottom: 12px;
-    left: 50%;
-    transform: translateX(-50%);
   }
 
   .button-group button {
-    width: 48px;                    /* pulsante rotondo */
+    width: 48px;
     height: 48px;
-    border-radius: 50%;             /* pallino */
-    font-size: 1.2rem;
+    border-radius: 50%;        /* pallini */
+    font-size: 0;              /* nascondi testo */
     padding: 0;
-    text-align: center;
     line-height: 48px;
+    text-align: center;
   }
 
-  /* Specifica: cambiamo solo il testo interno col contenuto più corto */
-  #new-quote-btn::after { content: "✨"; }
-  #custom-quote-btn::after { content: "✍️"; }
-  #text-quote-btn::after { content: "❤️"; }
-
-  /* Nascondiamo il testo originale nei pulsanti solo su mobile */
-  #new-quote-btn,
-  #custom-quote-btn,
-  #text-quote-btn {
-    font-size: 0; /* nasconde il testo */
-  }
+  /* Emoji diverse per ciascun bottone */
+  #new-quote-btn::after { content: "✨"; font-size: 1.4rem; }
+  #custom-quote-btn::after { content: "✍️"; font-size: 1.4rem; }
+  #text-quote-btn::after { content: "❤️"; font-size: 1.4rem; }
 }
 
 
