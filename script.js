@@ -145,8 +145,9 @@ const closeBtn = document.getElementById('closeModal');
 
 function setQuote(q){
   quoteContent.innerHTML = `<p>“${q.quote}”</p>`;
-  quoteMeta.innerHTML = `<p style="text-align:right; font-style:italic; margin-top:10px;">— ${q.author || "Anonimo"}</p>`;
+  quoteMeta.innerHTML = `<p style="text-align:right; font-style:italic; margin-top:10px;">— ${q.author || "Autore sconosciuto"}</p>`;
 }
+
 
 function setLoading(on){
   loader.style.display = on ? 'inline-block' : 'none';
@@ -168,11 +169,9 @@ async function openQuoteModal(){
   }catch(err){
     // fallback locale poetico (se API fallisce)
     const fallbacks = [
-      {quote:"Anche il silenzio ha un battito: è il tempo che ci attraversa.", author:""},
-      {quote:"Ti ho cercata dove la notte sfuma in chiarore: lì le parole sanno tacere.", author:""},
-      {quote:"Siamo stelle che hanno imparato a camminare: per questo inciampiamo nella luce.", author:""},
-      {quote:"La distanza misura soltanto lo spazio; il resto lo colma il pensiero.", author:""}
-    ];
+  {quote:"La notte ascolta i pensieri più profondi.", author:"Jacopo"},
+  {quote:"Ogni stella è un pensiero che brilla.", author:"Jacopo"},
+];
     setQuote(fallbacks[Math.floor(Math.random()*fallbacks.length)]);
     console.warn('Errore nel recupero citazione:', err);
   }finally{
@@ -187,7 +186,8 @@ window.addEventListener('keydown', (e)=>{
 });
 
 document.getElementById('new-quote-btn').addEventListener('click', () => {
-    location.reload(); // ricarica la pagina e genera nuova citazione
+    openQuoteModal(); // chiama direttamente la funzione
 });
+
 
 
