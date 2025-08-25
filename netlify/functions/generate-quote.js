@@ -26,13 +26,12 @@ export async function handler(event, context) {
     const authorPick = AUTHORS[Math.floor(Math.random()*AUTHORS.length)];
 
     const prompt = `Genera una citazione breve (1 o 2 frasi) in italiano, ${theme}.
-- Se l'autore selezionato è "Originale (Jacopo)", scrivi una citazione originale che potrebbe essere stata scritta da Jacopo, senza menzionare altri autori.
-- Se l'autore selezionato è un autore reale, scrivi una citazione originale nello **spirito tematico** indicato (senza imitazione letterale o testi esistenti), evitando riferimenti espliciti al nome e senza citazioni note.
+- Riporta una citazione originale di un autore reale nello **spirito tematico** indicato
 - Tono: poetico ma sobrio, immagini notturne/fugaci consentite.
 - Evita contenuti sensibili o espliciti. Non superare 35 parole totali.
 
 Restituisci **solo** JSON con le chiavi: {"author":"string","quote":"string"}
-Dove "author" sia: se autore reale, il suo nome; altrimenti "Jacopo".`;
+Dove "author" sia: autore reale, il suo nome; 
 
     const body = {
       model: "gpt-4o-mini",
