@@ -214,6 +214,15 @@ async function openCustomQuote() {
 
 document.getElementById('custom-quote-btn').addEventListener('click', openCustomQuote);
 
+document.getElementById('text-quote-btn').addEventListener('click', () => {
+  modal.style.display = 'flex';
+  const textQuote = {
+    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    author: "Jacopo"
+  };
+  setQuote(textQuote);
+});
+
 
 
 
