@@ -144,9 +144,10 @@ const loader = document.getElementById('loader');
 const closeBtn = document.getElementById('closeModal');
 
 function setQuote(q){
-  quoteContent.textContent = `“${q.quote}”`;
-  quoteMeta.textContent = q.author ? `— ${q.author}` : '';
+  quoteContent.innerHTML = `<p>“${q.quote}”</p>`;
+  quoteMeta.innerHTML = `<p style="text-align:right; font-style:italic; margin-top:10px;">— ${q.author || "Anonimo"}</p>`;
 }
+
 function setLoading(on){
   loader.style.display = on ? 'inline-block' : 'none';
 }
