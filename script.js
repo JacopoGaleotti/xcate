@@ -158,7 +158,7 @@ async function openQuoteModal(){
   modal.style.display = 'flex';
   // fetch from Netlify Function
   try{
-    const res = await fetch('/netlify/functions/generate-quote', {
+    const res = await fetch('/.netlify/functions/generate-quote', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({})
