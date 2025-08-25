@@ -148,9 +148,6 @@ function setQuote(q){
   quoteMeta.innerHTML = `<p style="text-align:right; font-style:italic; margin-top:10px;">— ${q.author || "Sconosciuto"}</p>`;
 }
 
-function setLoading(on){
-  loader.style.display = on ? 'block' : 'none';
-}
 
 async function openQuoteModal(){
   setLoading(true);
