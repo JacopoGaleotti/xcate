@@ -76,7 +76,6 @@ body{
 .modal__close:focus{ outline:2px solid var(--ring); outline-offset:2px }
 
 #new-quote-btn {
-  position: fixed;
   bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
@@ -96,7 +95,6 @@ body{
 }
 
 #custom-quote-btn {
-  position: fixed;
   bottom: 80px; /* per metterlo sopra al pulsante API */
   left: 50%;
   transform: translateX(-50%);
@@ -116,7 +114,6 @@ body{
 }
 
 #text-quote-btn {
-  position: fixed;
   bottom: 130px; /* sotto gli altri due */
   left: 50%;
   transform: translateX(-50%);
@@ -136,6 +133,33 @@ body{
   box-shadow: 0 0 15px rgba(160, 196, 255, 0.6);
 }
 
+.button-group {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* 👈 spazio uniforme tra i pulsanti */
+  align-items: center;
+}
+
+.button-group button {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f0f8ff;
+  border: 1px solid #a0c4ff;
+  border-radius: 20px;
+  padding: 10px 25px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.button-group button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 15px rgba(160, 196, 255, 0.6);
+}
 
 /* Loader */
 .loader{
