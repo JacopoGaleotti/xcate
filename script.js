@@ -145,18 +145,17 @@ const closeBtn = document.getElementById('closeModal');
 
 function setQuote(q){
   quoteContent.innerHTML = `<p>“${q.quote}”</p>`;
-  quoteMeta.innerHTML = `<p style="text-align:right; font-style:italic; margin-top:10px;">— ${q.author || "Autore sconosciuto"}</p>`;
+  quoteMeta.innerHTML = `<p style="text-align:right; font-style:italic; margin-top:10px;">— ${q.author || "Sconosciuto"}</p>`;
 }
 
-
 function setLoading(on){
-  loader.style.display = on ? 'inline-block' : 'none';
+  loader.style.display = on ? 'block' : 'none';
 }
 
 async function openQuoteModal(){
   setLoading(true);
   modal.style.display = 'flex';
-  // fetch from Netlify Function
+
   try{
     const res = await fetch('/.netlify/functions/generate-quote', {
       method: 'POST',
@@ -172,11 +171,10 @@ async function openQuoteModal(){
       throw new Error('Formato inatteso');
     }
   }catch(err){
-    // fallback locale poetico (se API fallisce)
     const fallbacks = [
-  {quote:"La notte ascolta i pensieri più profondi.", author:"Sconosciuto"},
-  {quote:"Ogni stella è un pensiero che brilla.", author:"Sconosciuto"},
-];
+      {quote:"La notte ascolta i pensieri più profondi.", author:"Sconosciuto"},
+      {quote:"Ogni stella è un pensiero che brilla.", author:"Sconosciuto"},
+    ];
     setQuote(fallbacks[Math.floor(Math.random()*fallbacks.length)]);
     console.warn('Errore nel recupero citazione:', err);
   }finally{
@@ -191,8 +189,9 @@ window.addEventListener('keydown', (e)=>{
 });
 
 document.getElementById('new-quote-btn').addEventListener('click', () => {
-    openQuoteModal(); // chiama direttamente la funzione
+  openQuoteModal(); // rotella funzionante anche su click
 });
+
 
 
 
