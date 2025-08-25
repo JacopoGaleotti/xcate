@@ -176,9 +176,8 @@ body{
 /* Responsive buttons layout */
 @media (max-width: 480px) {
   .button-group {
-    flex-direction: row;           /* pulsanti in riga */
     justify-content: center;       /* centrati */
-    gap: 8px;                      /* meno spazio tra i pulsanti */
+    gap: 16px;                      /* meno spazio tra i pulsanti */
     bottom: 10px;                  /* più vicino al bordo basso */
   }
 
