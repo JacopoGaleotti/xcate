@@ -1,0 +1,16 @@
+# Netlify configuration
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# (Optional) Force no caching for the function route
+[[headers]]
+  for = "/.netlify/functions/*"
+  [headers.values]
+    Cache-Control = "no-store"
+
+# Redirect legacy /api/* to functions if desired
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
