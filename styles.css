@@ -170,6 +170,8 @@ body{
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* Small screens */
+
 @media (max-width:480px){
-  .modal__content{font-size:1.15rem}
+  .modal__content {font-size:1rem; line-height:1.5;}
 }
+
