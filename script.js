@@ -150,7 +150,6 @@ function setQuote(q){
 
 
 async function openQuoteModal(){
-  setLoading(true);
   modal.style.display = 'flex';
 
   try{
@@ -175,7 +174,6 @@ async function openQuoteModal(){
     setQuote(fallbacks[Math.floor(Math.random()*fallbacks.length)]);
     console.warn('Errore nel recupero citazione:', err);
   }finally{
-    setLoading(false);
   }
 }
 
