@@ -178,7 +178,10 @@ async function openQuoteModal(){
 }
 
 // chiusura modale
-closeBtn.addEventListener('click', ()=> modal.style.display = 'none');
+closeBtn.addEventListener('click', () => {
+  modal.style.display = 'none';
+  modal.querySelector('.modal__panel').classList.remove('text-mode');
+});
 window.addEventListener('keydown', (e)=>{
   if(e.key === 'Escape') modal.style.display = 'none';
 });
@@ -211,6 +214,24 @@ async function openCustomQuote() {
 }
 
 document.getElementById('custom-quote-btn').addEventListener('click', openCustomQuote);
+
+const textBtn = document.getElementById('textBtn');
+
+textBtn.addEventListener('click', () => {
+  // apri popup
+  modal.style.display = 'flex';
+
+  // aggiungi classe speciale
+  modal.querySelector('.modal__panel').classList.add('text-mode');
+
+  // modifica contenuto per mostrare il testo fisso
+  const myText = "Questo è il piccolo testo scritto da me, sempre uguale.";
+  quoteContent.innerHTML = `<p>${myText}</p>`;
+  quoteMeta.innerHTML = ''; // niente autore
+  document.getElementById('quoteTitle').textContent = "Testo personale";
+});
+
+
 
 
 
