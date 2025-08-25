@@ -175,3 +175,20 @@ body{
   .modal__content {font-size:1rem; line-height:1.5;}
 }
 
+/* Responsive buttons layout */
+@media (max-width: 480px) {
+  .button-group {
+    flex-direction: row;           /* pulsanti in riga */
+    justify-content: center;       /* centrati */
+    gap: 8px;                      /* meno spazio tra i pulsanti */
+    bottom: 10px;                  /* più vicino al bordo basso */
+  }
+
+  .button-group button {
+    font-size: 0.8rem;             /* testo più piccolo */
+    padding: 8px 12px;             /* pulsanti più compatti */
+    border-radius: 12px;
+  }
+}
+
+
