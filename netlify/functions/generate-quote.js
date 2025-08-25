@@ -12,16 +12,17 @@ export async function handler(event, context) {
 
     const timestamp = Date.now();
 
-    const prompt = `Genera una citazione breve (1 o 2 frasi) in italiano.
-- Tema: romantico, sociologico, filosofico o esistenziale.
-- Autore: scegli un autore appropriato (classico o contemporaneo).
-- Tono: poetico, sobrio, immagini notturne/fugaci consentite.
-- Evita contenuti sensibili o espliciti.
-- Non superare 35 parole.
-- Restituisci SOLO JSON valido con chiavi:
-  {"author":"string","quote":"string"}
+    const prompt = `Genera una citazione breve in italiano (1-2 frasi) su temi romantici, filosofici, sociologici o esistenziali. Scegli un autore appropriato (classico o contemporaneo). La citazione deve essere poetica e sobria, con immagini notturne o fugaci consentite.  
 
-Timestamp: ${timestamp}`;
+⚠️ IMPORTANTE: restituisci **solo JSON valido** senza testo extra, senza spiegazioni, senza virgolette esterne. Il JSON deve avere **esattamente** queste chiavi:  
+{
+  "author": "string",
+  "quote": "string"
+}
+
+Non superare 35 parole. Nessun contenuto sensibile o esplicito.  
+Restituisci sempre sia l'autore che la citazione.
+`;
 
     const body = {
       model: "gpt-4o-mini",
